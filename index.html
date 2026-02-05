@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive;
+    background-color: #ffd6e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .card {
+    background: #fff0f6;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 360px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 { color: #ff4d88; }
+
+  p {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #ff66a3;
+    color: white;
+    transition: transform 0.3s ease;
+  }
+
+  button:hover { transform: scale(1.1); }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .no {
+    background: #ccc;
+    color: #333;
+  }
+
+  /* ❤️ MEMORY GRID */
+  .memory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .memory-grid img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  }
+
+  .memory-grid img.big {
+    grid-column: span 2;
+    height: 180px;
+  }
+
+  /* 📧 EMAIL */
+  .mail {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease;
+    text-align: left;
+  }
+
+  .mail-header {
+    background: #ff66a3;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+  }
+
+  .mail-body {
+    padding: 20px;
+    color: #444;
+    font-size: 16px;
+  }
+
+  .mail-meta {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+  }
+
+  /* ❤️ FLOATING HEARTS */
+  .heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+  }
+
+  /* 🎉 CONFETTI */
+  .confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    animation: fall 3s linear forwards;
+  }
+
+  @keyframes fall {
+    to { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div class="card">
+    <h1>Hey My Love ❤️</h1>
+    <p>
+      Life with you has been my favorite journey 🌍<br>
+      Every smile, every memory, every moment —<br>
+      it’s all better with you 💕
+    </p>
+    <button onclick="nextPage(2)">Continue 💖</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div class="card">
+    <h1>Our Memories 💑</h1>
+    <p>Every picture holds a piece of my heart 💗</p>
+
+    <div class="memory-grid">
+      <img class="big" src="pic1.jpg">
+      <img src="pic2.jpg">
+      <img src="pic3.jpg">
+    </div>
+
+    <button onclick="nextPage(3)">One More Thing 💌</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <div class="card">
+    <h1>My Forever ❤️</h1>
+    <p>Will you be my Valentine?</p>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="yesClick()">YES 💘</button>
+      <button class="no" id="noBtn">NO 🙈</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <div class="card mail">
+    <div class="mail-header">💌 New Message</div>
+    <div class="mail-body">
+      <div class="mail-meta">
+        <strong>To:</strong> My Love ❤️<br>
+        <strong>From:</strong> Your Valentine 💕<br>
+        <strong>Subject:</strong> Forever Us 💍
+      </div>
+
+      Hi My Love ❤️,<br><br>
+      I would choose you in every lifetime,  
+      every universe,  
+      and every heartbeat 💖<br><br>
+
+      Happy Valentine’s Day 💕<br><br>
+      — Yours, Always 🥰
+    </div>
+
+    <button onclick="restart()">🔁 Start Again</button>
+  </div>
+</div>
+
+<script>
+  function nextPage(pageNumber) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page' + pageNumber).classList.add('active');
+  }
+
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+
+  const noTexts = [
+    "Really sure? 😳",
+    "Think again 🥺",
+    "Please yaar, do do this! 😶",
+    "Gimme another chance 😭",
+    "Okay… it's done! 😔"
+  ];
+
+  let noClickCount = 0;
+  let yesScale = 1;
+
+  noBtn.addEventListener("click", () => {
+    if (noClickCount < noTexts.length) {
+      noBtn.innerText = noTexts[noClickCount];
+      noClickCount++;
+      yesScale *= 1.4;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    if (noClickCount === noTexts.length) {
+      setTimeout(() => {
+        noBtn.style.display = "none";
+      }, 500);
+    }
+  });
+
+  function yesClick() {
+    nextPage(4);
+    createConfetti();
+  }
+
+  function createConfetti() {
+    for (let i = 0; i < 60; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.background = ["#ff4d88", "#ffd700", "#ff66a3"][Math.floor(Math.random() * 3)];
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }
+  }
+
+  function restart() {
+    noClickCount = 0;
+    yesScale = 1;
+    yesBtn.style.transform = "scale(1)";
+    noBtn.style.display = "inline-block";
+    noBtn.innerText = "NO 🙈";
+    nextPage(1);
+  }
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 700);
+</script>
+
+</body>
+</html>
